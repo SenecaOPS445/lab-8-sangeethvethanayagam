@@ -1,11 +1,40 @@
-/home/svethanayagam3/ops445/
-├── lab1
-├── lab2
-├── lab3
-├── lab4
-├── lab5
-├── lab6
-├── lab7
-└── lab8
 
-8 directories, 0 files
+PLAY [ops445 Configurations] ***************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [svethanayagam3]
+
+TASK [Update Apache] ***********************************************************
+ok: [svethanayagam3]
+
+TASK [Install EPEL] ************************************************************
+ok: [svethanayagam3]
+
+TASK [Remove 'tree' package] ***************************************************
+changed: [svethanayagam3]
+
+TASK [Set hostname to svethanayagam3] ******************************************
+ok: [svethanayagam3]
+
+TASK [Create a new user svethanayagam3] ****************************************
+ok: [svethanayagam3]
+
+TASK [Allow passwordless sudo for the user] ************************************
+ok: [svethanayagam3]
+
+TASK [Configure passwordless SSH for the new user] *****************************
+ok: [svethanayagam3]
+
+TASK [Create directory structure for labs] *************************************
+ok: [svethanayagam3] => (item=1)
+ok: [svethanayagam3] => (item=2)
+ok: [svethanayagam3] => (item=3)
+ok: [svethanayagam3] => (item=4)
+ok: [svethanayagam3] => (item=5)
+ok: [svethanayagam3] => (item=6)
+ok: [svethanayagam3] => (item=7)
+ok: [svethanayagam3] => (item=8)
+
+PLAY RECAP *********************************************************************
+svethanayagam3             : ok=9    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
