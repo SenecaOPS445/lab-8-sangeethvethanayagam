@@ -1,0 +1,53 @@
+---
+- name: ops445 Configurations
+  hosts: svethanayagam3
+  user: student	
+  become: yes
+  tasks:
+    - name: Update Apache
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Install EPEL
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Remove 'tree' package
+      yum:
+        name: tree
+        state: absent
+
+    - name: Set new hostname svethanayagam3
+      hostname:
+        name: svethanayagam3
+
+    - name: Create svethanayagam3 user with sudo access
+      user:
+        name: svethanayagam3
+        groups: wheel
+        state: present
+
+    - name: Configure SSH for new user (No password)
+      authorized_key:
+        user: svethanayagam3
+        state: present
+        key: "{{ lookup('file', '/home/svethanayagam3/.ssh/id_rsa.pub') }}"
+
+    - name: Create directory structure for labs
+      file:
+        path: "/home/svethanayagam3/ops445/lab{{ item }}"
+        state: directory
+        owner: svethanayagam3
+        group: svethanayagam3
+        mode: '0755'
+      with_items:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
