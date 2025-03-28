@@ -1,7 +1,7 @@
 ---
 - name: ops445 Configurations
   hosts: svethanayagam3
-  user: student	
+  user: student
   become: yes
   tasks:
     - name: Update Apache
@@ -19,17 +19,26 @@
         name: tree
         state: absent
 
-    - name: Set new hostname svethanayagam3
+    - name: Set hostname to svethanayagam3
       hostname:
         name: svethanayagam3
 
-    - name: Create svethanayagam3 user with sudo access
+    - name: Create a new user svethanayagam3
       user:
         name: svethanayagam3
         groups: wheel
         state: present
 
-    - name: Configure SSH for new user (No password)
+    - name: Allow passwordless sudo for the user
+      copy:
+        dest: "/etc/sudoers.d/svethanayagam3"
+        content: |
+          svethanayagam3 ALL=(ALL) NOPASSWD:ALL
+        owner: root
+        group: root
+        mode: '0440'
+
+    - name: Configure passwordless SSH for the new user
       authorized_key:
         user: svethanayagam3
         state: present
@@ -39,8 +48,8 @@
       file:
         path: "/home/svethanayagam3/ops445/lab{{ item }}"
         state: directory
-        owner: svethanayagam3
-        group: svethanayagam3
+        owner: svethanayagam3  
+        group: svethanayagam3  
         mode: '0755'
       with_items:
         - 1
